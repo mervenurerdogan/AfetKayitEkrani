@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Afet_kayitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Afet_turDB">
+          <Key>
+            <PropertyRef Name="afet_tur_id" />
+          </Key>
+          <Property Name="afet_tur_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="afet_tur_adi" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AfetDB">
+          <Key>
+            <PropertyRef Name="afet_id" />
+          </Key>
+          <Property Name="afet_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="seri_no" Type="varchar" MaxLength="50" />
+          <Property Name="glide_no" Type="varchar" MaxLength="50" />
+          <Property Name="baslangic_tarih" Type="date" />
+          <Property Name="bitis_tarih" Type="date" />
+          <Property Name="neden" Type="varchar" MaxLength="50" />
+          <Property Name="neden_aciklama" Type="varchar" MaxLength="300" />
+          <Property Name="etkilendigi_alan" Type="varchar" MaxLength="50" />
+          <Property Name="kaynak" Type="varchar" MaxLength="50" />
+          <Property Name="afet_tur_id" Type="int" />
+          <Property Name="il_id" Type="int" />
+        </EntityType>
+        <EntityType Name="ilceler">
+          <Key>
+            <PropertyRef Name="ilce_id" />
+          </Key>
+          <Property Name="ilce_id" Type="int" Nullable="false" />
+          <Property Name="ilce" Type="nvarchar" MaxLength="255" />
+          <Property Name="il_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="iller">
+          <Key>
+            <PropertyRef Name="il_id" />
+          </Key>
+          <Property Name="il_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="il" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="onayDB">
+          <Key>
+            <PropertyRef Name="onay_id" />
+          </Key>
+          <Property Name="onay_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="onay_tur" Type="binary" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_AfetDB_Afet_turDB">
+          <End Role="Afet_turDB" Type="Self.Afet_turDB" Multiplicity="0..1" />
+          <End Role="AfetDB" Type="Self.AfetDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Afet_turDB">
+              <PropertyRef Name="afet_tur_id" />
+            </Principal>
+            <Dependent Role="AfetDB">
+              <PropertyRef Name="afet_tur_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AfetDB_iller">
+          <End Role="iller" Type="Self.iller" Multiplicity="0..1" />
+          <End Role="AfetDB" Type="Self.AfetDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iller">
+              <PropertyRef Name="il_id" />
+            </Principal>
+            <Dependent Role="AfetDB">
+              <PropertyRef Name="il_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilceler_iller">
+          <End Role="iller" Type="Self.iller" Multiplicity="1" />
+          <End Role="ilceler" Type="Self.ilceler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iller">
+              <PropertyRef Name="il_id" />
+            </Principal>
+            <Dependent Role="ilceler">
+              <PropertyRef Name="il_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Afet_kayitModelStoreContainer">
+          <EntitySet Name="Afet_turDB" EntityType="Self.Afet_turDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AfetDB" EntityType="Self.AfetDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ilceler" EntityType="Self.ilceler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="iller" EntityType="Self.iller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="onayDB" EntityType="Self.onayDB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AfetDB_Afet_turDB" Association="Self.FK_AfetDB_Afet_turDB">
+            <End Role="Afet_turDB" EntitySet="Afet_turDB" />
+            <End Role="AfetDB" EntitySet="AfetDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AfetDB_iller" Association="Self.FK_AfetDB_iller">
+            <End Role="iller" EntitySet="iller" />
+            <End Role="AfetDB" EntitySet="AfetDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilceler_iller" Association="Self.FK_ilceler_iller">
+            <End Role="iller" EntitySet="iller" />
+            <End Role="ilceler" EntitySet="ilceler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Afet_kayitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Afet_turDB">
+          <Key>
+            <PropertyRef Name="afet_tur_id" />
+          </Key>
+          <Property Name="afet_tur_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="afet_tur_adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AfetDB" Relationship="Self.FK_AfetDB_Afet_turDB" FromRole="Afet_turDB" ToRole="AfetDB" />
+        </EntityType>
+        <EntityType Name="AfetDB">
+          <Key>
+            <PropertyRef Name="afet_id" />
+          </Key>
+          <Property Name="afet_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="seri_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="glide_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="baslangic_tarih" Type="DateTime" Precision="0" />
+          <Property Name="bitis_tarih" Type="DateTime" Precision="0" />
+          <Property Name="neden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="neden_aciklama" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="etkilendigi_alan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kaynak" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="afet_tur_id" Type="Int32" />
+          <Property Name="il_id" Type="Int32" />
+          <NavigationProperty Name="Afet_turDB" Relationship="Self.FK_AfetDB_Afet_turDB" FromRole="AfetDB" ToRole="Afet_turDB" />
+          <NavigationProperty Name="iller" Relationship="Self.FK_AfetDB_iller" FromRole="AfetDB" ToRole="iller" />
+        </EntityType>
+        <EntityType Name="ilceler">
+          <Key>
+            <PropertyRef Name="ilce_id" />
+          </Key>
+          <Property Name="ilce_id" Type="Int32" Nullable="false" />
+          <Property Name="ilce" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="il_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="iller" Relationship="Self.FK_ilceler_iller" FromRole="ilceler" ToRole="iller" />
+        </EntityType>
+        <EntityType Name="iller">
+          <Key>
+            <PropertyRef Name="il_id" />
+          </Key>
+          <Property Name="il_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="il" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AfetDB" Relationship="Self.FK_AfetDB_iller" FromRole="iller" ToRole="AfetDB" />
+          <NavigationProperty Name="ilceler" Relationship="Self.FK_ilceler_iller" FromRole="iller" ToRole="ilceler" />
+        </EntityType>
+        <EntityType Name="onayDB">
+          <Key>
+            <PropertyRef Name="onay_id" />
+          </Key>
+          <Property Name="onay_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="onay_tur" Type="Binary" MaxLength="50" FixedLength="true" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_AfetDB_Afet_turDB">
+          <End Role="Afet_turDB" Type="Self.Afet_turDB" Multiplicity="0..1" />
+          <End Role="AfetDB" Type="Self.AfetDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Afet_turDB">
+              <PropertyRef Name="afet_tur_id" />
+            </Principal>
+            <Dependent Role="AfetDB">
+              <PropertyRef Name="afet_tur_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AfetDB_iller">
+          <End Role="iller" Type="Self.iller" Multiplicity="0..1" />
+          <End Role="AfetDB" Type="Self.AfetDB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iller">
+              <PropertyRef Name="il_id" />
+            </Principal>
+            <Dependent Role="AfetDB">
+              <PropertyRef Name="il_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilceler_iller">
+          <End Role="iller" Type="Self.iller" Multiplicity="1" />
+          <End Role="ilceler" Type="Self.ilceler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="iller">
+              <PropertyRef Name="il_id" />
+            </Principal>
+            <Dependent Role="ilceler">
+              <PropertyRef Name="il_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Afet_kayitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Afet_turDB" EntityType="Self.Afet_turDB" />
+          <EntitySet Name="AfetDB" EntityType="Self.AfetDB" />
+          <EntitySet Name="ilceler" EntityType="Self.ilceler" />
+          <EntitySet Name="iller" EntityType="Self.iller" />
+          <EntitySet Name="onayDB" EntityType="Self.onayDB" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_AfetDB_Afet_turDB" Association="Self.FK_AfetDB_Afet_turDB">
+            <End Role="Afet_turDB" EntitySet="Afet_turDB" />
+            <End Role="AfetDB" EntitySet="AfetDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AfetDB_iller" Association="Self.FK_AfetDB_iller">
+            <End Role="iller" EntitySet="iller" />
+            <End Role="AfetDB" EntitySet="AfetDB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilceler_iller" Association="Self.FK_ilceler_iller">
+            <End Role="iller" EntitySet="iller" />
+            <End Role="ilceler" EntitySet="ilceler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Afet_kayitModelStoreContainer" CdmEntityContainer="Afet_kayitEntities">
+          <EntitySetMapping Name="Afet_turDB">
+            <EntityTypeMapping TypeName="Afet_kayitModel.Afet_turDB">
+              <MappingFragment StoreEntitySet="Afet_turDB">
+                <ScalarProperty Name="afet_tur_id" ColumnName="afet_tur_id" />
+                <ScalarProperty Name="afet_tur_adi" ColumnName="afet_tur_adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AfetDB">
+            <EntityTypeMapping TypeName="Afet_kayitModel.AfetDB">
+              <MappingFragment StoreEntitySet="AfetDB">
+                <ScalarProperty Name="afet_id" ColumnName="afet_id" />
+                <ScalarProperty Name="seri_no" ColumnName="seri_no" />
+                <ScalarProperty Name="glide_no" ColumnName="glide_no" />
+                <ScalarProperty Name="baslangic_tarih" ColumnName="baslangic_tarih" />
+                <ScalarProperty Name="bitis_tarih" ColumnName="bitis_tarih" />
+                <ScalarProperty Name="neden" ColumnName="neden" />
+                <ScalarProperty Name="neden_aciklama" ColumnName="neden_aciklama" />
+                <ScalarProperty Name="etkilendigi_alan" ColumnName="etkilendigi_alan" />
+                <ScalarProperty Name="kaynak" ColumnName="kaynak" />
+                <ScalarProperty Name="afet_tur_id" ColumnName="afet_tur_id" />
+                <ScalarProperty Name="il_id" ColumnName="il_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ilceler">
+            <EntityTypeMapping TypeName="Afet_kayitModel.ilceler">
+              <MappingFragment StoreEntitySet="ilceler">
+                <ScalarProperty Name="ilce_id" ColumnName="ilce_id" />
+                <ScalarProperty Name="ilce" ColumnName="ilce" />
+                <ScalarProperty Name="il_id" ColumnName="il_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="iller">
+            <EntityTypeMapping TypeName="Afet_kayitModel.iller">
+              <MappingFragment StoreEntitySet="iller">
+                <ScalarProperty Name="il_id" ColumnName="il_id" />
+                <ScalarProperty Name="il" ColumnName="il" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="onayDB">
+            <EntityTypeMapping TypeName="Afet_kayitModel.onayDB">
+              <MappingFragment StoreEntitySet="onayDB">
+                <ScalarProperty Name="onay_id" ColumnName="onay_id" />
+                <ScalarProperty Name="onay_tur" ColumnName="onay_tur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Afet_kayitModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

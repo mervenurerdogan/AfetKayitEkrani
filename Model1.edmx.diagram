@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a1c94a1a0f6c418e931839d9d6688ea0" Name="Diagram1">
+        <EntityTypeShape EntityType="Afet_kayitModel.Afet_turDB" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Afet_kayitModel.AfetDB" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Afet_kayitModel.ilceler" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Afet_kayitModel.iller" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Afet_kayitModel.onayDB" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Afet_kayitModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="Afet_kayitModel.FK_AfetDB_Afet_turDB" ManuallyRouted="false" />
+        <AssociationConnector Association="Afet_kayitModel.FK_AfetDB_iller" ManuallyRouted="false" />
+        <AssociationConnector Association="Afet_kayitModel.FK_ilceler_iller" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
