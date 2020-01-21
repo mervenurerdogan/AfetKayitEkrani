@@ -1,0 +1,61 @@
+﻿@model AfetKayit1.Models.Entity.AfetDB
+@{
+    ViewBag.Title = "AfetGetir";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+@using (Html.BeginForm("AfetGuncelle","Afet",FormMethod.Post))
+{
+
+<div class="form-group" >
+
+    <label>Afet ID</label>
+    @Html.TextBoxFor(a => a.afet_id, new { @class = "form-control", @readonly = "readonly" })
+
+    <br />
+    <label>Afet Seri NO</label>
+    @Html.TextBoxFor(a => a.seri_no, new { @class = "form-control" })
+
+    <br />
+    <label>Afet Glide NO</label>
+    @Html.TextBoxFor(a => a.glide_no, new { @class = "form-control" })
+    <br />
+    <label>Afet Başlagıç Tarihi</label>
+    @Html.TextBoxFor(a => a.baslangic_tarih, new { @class = "form-control" })
+
+
+    <br />
+    <label>Afet Bitiş Tarihi</label>
+    
+    @Html.TextBoxFor(a => a.bitis_tarih, new { @class = "form-control" })
+    <br />
+    <label>Afetin Nedeni</label>
+    
+    @Html.TextBoxFor(a => a.neden, new { @class = "form-control" })
+    <br />
+    <label>Afet Neden Açıklama</label>
+  
+    @Html.TextBoxFor(a => a.neden_aciklama, new { @class = "form-control" })
+    <br />
+    <label>Afetin Etkilendiği Alan </label>
+   
+    @Html.TextBoxFor(a => a.etkilendigi_alan, new { @class = "form-control" })
+    <br />
+    <label>Afetin Kaynağı</label>
+   
+    @Html.TextBoxFor(a => a.kaynak, new { @class = "form-control" })
+    <br />
+    <label>Afet Türü</label>
+   
+    @Html.DropDownListFor(a => a.Afet_turDB.afet_tur_id, (List<SelectListItem>)ViewBag.aftdgr, new { @class = "form-control" })
+    <br />
+    <label>İL</label>
+   
+    @Html.DropDownListFor(i => i.iller.il_id, (List<SelectListItem>)ViewBag.dgril, new { @class = "form-control" })
+</div>
+    <div>
+       <button class="btn btn-warning">Afet Güncelle</button>
+
+    </div>
+
+}

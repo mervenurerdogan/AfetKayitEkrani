@@ -1,0 +1,64 @@
+﻿@using AfetKayit1.Models.Entity
+@model List<AfetDB>
+@{
+    ViewBag.Title = "AfetListele";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<h2>AfetListesi</h2>
+
+
+
+<table id=" tbl1" class="table table-bordered">
+
+    <thead>
+        <tr>
+
+            <th>Afet Seri NO</th>
+            <th>Afet Glide NO</th>
+            <th>Başlangıç Tarihi</th>
+            <th>Bitiş Tarihi</th>
+            <th>Afet Nedeni</th>
+            <th>Afet Açıklama</th>
+            <th>Etkilendiği Alan</th>
+            <th>Afetin Kaynağı</th>
+            <th>Afetin Türü</th>
+            <th>İL</th>
+            <th>SİL</th>
+            <th>GÜNCELLE</th>
+
+        </tr>
+
+
+
+
+    </thead>
+
+    <tbody>
+        @foreach (var aft in Model)
+        {
+            <tr>
+
+
+                <td>@aft.seri_no</td>
+                <td>@aft.glide_no</td>
+                <td>@aft.baslangic_tarih</td>
+                <td>@aft.bitis_tarih</td>
+                <td>@aft.neden</td>
+                <td>@aft.neden_aciklama</td>
+                <td>@aft.etkilendigi_alan</td>
+                <td>@aft.kaynak</td>
+                <td>@aft.Afet_turDB.afet_tur_adi</td>
+                <td>@aft.iller.il</td>
+                <td><a href="/Afet/AfetSil/@aft.afet_id" class="btn btn-danger" style="color:black">SİL</a></td>
+                <td><a href="/Afet/AfetGetir/@aft.afet_id" class="btn btn-success" style="color:black">GÜNCELLE</a></td>
+            </tr>
+
+        }
+
+    </tbody>
+
+
+</table>
+<a style="color:black" class="btn btn-info" href="/Afet/YeniAfet">EKLE</a>
+
