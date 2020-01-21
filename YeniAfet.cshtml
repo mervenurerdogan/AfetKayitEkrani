@@ -1,0 +1,66 @@
+﻿@model AfetKayit1.Models.Entity.AfetDB
+@{
+    ViewBag.Title = "YeniAfet";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+
+<form class="form-group" method="post">
+    <div>
+        <label>Afet SeriNO</label>
+        <input type="text" class="form-control" name="seri_no" />
+
+    </div>
+    <div>
+        <label>Afet GlideNO</label>
+        <input type="text" class="form-control" name="glide_no" />
+
+    </div>
+    <div>
+        <label>Afet Başlangış Tarihi</label>
+        <input type="date" class="form-control" name="baslangic_tarih" />
+    </div>
+    <div>
+        <label>Afet Bitiş Tarihi</label>
+        <input type="date" class="form-control" name="bitis_tarih" />
+    </div>
+    
+    <div>
+        <label>Afet Nedeni</label>
+        <input type="text" class="form-control" name="neden" />
+    </div>
+    <div>
+        <label>Afet Nedeni Açıklama</label>
+        <input type="text" class="form-control" name="neden_aciklama" />
+    </div>
+    <div>
+        <label>Etkilendiği Alan</label>
+        <input type="text" class="form-control" name="etkilendigi_alan" />
+    </div>
+    <div>
+        <label>Afetin Kaynağı</label>
+        <input type="text" class="form-control" name="kaynak" />
+    </div>
+    <div>
+        <label>Afet Türü</label>
+        @Html.DropDownListFor(m => m.Afet_turDB.afet_tur_id, (List<SelectListItem>)ViewBag.dgrafet, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Afet_turDB.afet_tur_id, "", new { @style = "color:red" })
+    </div>
+    <div>
+        <label>Afetin Olduğu İl</label>
+        @Html.DropDownListFor(i=>i.iller.il_id,(List<SelectListItem>)ViewBag.dgril,new { @class ="form-control"})
+        @Html.ValidationMessageFor(i=>i.iller.il_id,"",new { @style="color:red"})
+    </div>
+    
+        <div style="margin-top:15px">
+
+            <button class="btn btn-info">Yeni Afet Ekle</button>
+
+        </div>
+    
+    <div></div>
+    <div></div>
+
+
+</form>
+
